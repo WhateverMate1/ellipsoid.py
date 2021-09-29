@@ -35,7 +35,7 @@ def calculate(a, one_alpha: float, n: int) -> None:
     W = math.sqrt(1 - e_1 * math.pow(math.sin(B), 2))
     V = math.sqrt(1 + e_2 * math.pow(math.cos(B), 2))
     print(f" B: {B}\n L: {L}\n W: {W}, V: {V}")
-    control_spheroid = a * W - b * V == 0
+    control_spheroid = round(a * W, 4) - round(b * V, 4) == 0
     print(a * W, b * V)
     print('Контроль значения 1-й и 2-ой сфероидических функций ВЫПОЛНЕН') if control_spheroid else print(
         "Контроль значения 1-й и 2-ой сфероидических функций НЕ ВЫПОЛНЕН")
@@ -45,7 +45,7 @@ def calculate(a, one_alpha: float, n: int) -> None:
     N = c / V
     R_avg = math.sqrt(M * N)
     print(f" M: {M}\n N: {N}\n R средний: {R_avg}")
-    control_curvature = N / M - math.pow(V, 2) == 0
+    control_curvature = round(N / M, 4) - round(math.pow(V, 2), 4) == 0
     print(N / M, math.pow(V, 2))
     print('Контроль значений меридиана и вертикала ВЫПОЛНЕН') if control_curvature else print(
         "Контроль значений меридиана и вертикала НЕ ВЫПОЛНЕН")
@@ -55,9 +55,10 @@ def calculate(a, one_alpha: float, n: int) -> None:
     x = a * math.cos(U) * math.cos(L)
     y = a * math.cos(U) * math.sin(L)
     z = b * math.sin(U)
-    control_coords_x = x - N * math.cos(B) * math.cos(L) == 0
-    control_coords_y = y - N * math.cos(B) * math.sin(L) == 0
-    control_coords_z = z - N * (1 - e_1) * math.sin(B) == 0
+    print(f"x: {x}\ny: {y}\n z: {z}")
+    control_coords_x = round(x, 4) - round(N * math.cos(B) * math.cos(L), 4) == 0
+    control_coords_y = round(y, 4) - round(N * math.cos(B) * math.sin(L), 4) == 0
+    control_coords_z = round(z, 4) - round(N * (1 - e_1) * math.sin(B), 4) == 0
     print(x, N * math.cos(B) * math.cos(L))
     print('Контроль по x ВЫПОЛНЕН') if control_coords_x else print(
         "Контроль по x НЕ ВЫПОЛНЕН")
@@ -70,19 +71,19 @@ def calculate(a, one_alpha: float, n: int) -> None:
 
 
 def control_params(a, alpha, b, e_1, e_2, c: float):
-    control1 = b - a * a / c == 0
+    control1 = round(b, 4) - round(a * a / c, 4) == 0
     print(b, a * a / c)
     print('Контроль значения малой полуоси ВЫПОЛНЕН') if control1 else print(
         "Контроль значения малой полуоси НЕ ВЫПОЛНЕН")
-    control2 = e_1 - (math.pow(a, 2) - math.pow(b, 2)) / math.pow(a, 2)
+    control2 = round(e_1, 4) - round((math.pow(a, 2) - math.pow(b, 2)) / math.pow(a, 2), 4) == 0
     print(e_1, (math.pow(a, 2) - math.pow(b, 2)) / math.pow(a, 2))
     print('Контроль значения 1-го эксцентриситета ВЫПОЛНЕН') if control2 else print(
         "Контроль 1-го эксцентриситета НЕ ВЫПОЛНЕН")
-    control3 = e_2 - (math.pow(a, 2) - math.pow(b, 2)) / math.pow(b, 2)
+    control3 = round(e_2, 4) - round((math.pow(a, 2) - math.pow(b, 2)) / math.pow(b, 2) , 4) == 0
     print(e_2, (math.pow(a, 2) - math.pow(b, 2)) / math.pow(b, 2))
     print('Контроль значения 2-го эксцентриситета ВЫПОЛНЕН') if control3 else print(
         "Контроль значения 2-го эксцентриситета НЕ ВЫПОЛНЕН")
-    control4 = alpha - (a - b) / a
+    control4 = round(alpha, 4) - round((a - b) / a, 4) == 0
     print(alpha, (a - b) / a)
     print('Контроль полярного радиуса кривизны ВЫПОЛНЕН') if control4 else print(
         "Контроль полярного радиуса кривизны НЕ ВЫПОЛНЕН")
