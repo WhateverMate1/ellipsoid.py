@@ -44,7 +44,7 @@ def calculate(a, one_alpha: float, n: int) -> None:
     M = c / math.pow(V, 3)
     N = c / V
     R_avg = math.sqrt(M * N)
-    print(f" M: {M}\n N: {M}\n R средний: {R_avg}")
+    print(f" M: {M}\n N: {N}\n R средний: {R_avg}")
     control_curvature = N / M - math.pow(V, 2) == 0
     print(N / M, math.pow(V, 2))
     print('Контроль значений меридиана и вертикала ВЫПОЛНЕН') if control_curvature else print(
